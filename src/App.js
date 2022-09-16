@@ -39,11 +39,16 @@ export default function App() {
           {todoList.map((todo, i) => {
             return (
               <li className="todo-item" key={i}>
-                <button onClick={() => handleDeleteTodo(i)}>X</button>
-                <label class="container">
+                <button
+                  className="delete-item"
+                  onClick={() => handleDeleteTodo(i)}
+                >
+                  &#128465;
+                </button>
+                <label class="todo-label">
                   <input type="checkbox" />
-                  {todo}
-                  <span class="checkmark"></span>
+                  <span className="item-desc">{todo}</span>
+                  <span className="checkmark"></span>
                 </label>
               </li>
             );
