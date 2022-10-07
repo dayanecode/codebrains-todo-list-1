@@ -1,9 +1,13 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "./styles.css";
 
 export default function App() {
   const [todo, setTodo] = useState("");
   const [todoList, setTodoList] = useState([]);
+
+  useEffect(() => {
+    console.log({ todo });
+  }, [todo]);
 
   function addTodo() {
     if (!todo) return;
@@ -20,17 +24,27 @@ export default function App() {
   }
 
   return (
-    <section className="main">
+    <main>
+      <header>TaskDo</header>
+
+      <section className="pending-task-counter">
+        <p>👨🏽‍💻</p>
+        <p>4 tasks pending</p>
+      </section>
+
       <input
+        className="new-task-input"
         onChange={(event) => {
           setTodo(event.target.value);
         }}
         onKeyDown={handleEnter}
         type="text"
-        placeholder="Coloque aqui seu afazer"
+        placeholder="Add New Task"
         value={todo}
       />
-      <button onClick={addTodo}>Add</button>
+      <button className="new-task-button" onClick={addTodo}>
+        +
+      </button>
 
       {!todoList.length ? (
         <ul>"Sua lista está vazia"</ul>
@@ -55,6 +69,6 @@ export default function App() {
           })}
         </ul>
       )}
-    </section>
+    </main>
   );
 }

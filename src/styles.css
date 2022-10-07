@@ -1,3 +1,39 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap');
+
+* {
+  font-family: 'Inter', sans-serif;
+}
+
+main {
+  margin: 40px;
+}
+
+main header {
+  font-size: 64px;
+  font-weight: bold;
+  color: #5E5E5E;
+  margin-bottom: 50px;
+}
+
+.pending-task-counter {
+  margin-bottom: 50px;
+  display: flex;
+  align-items: center;
+}
+
+.pending-task-counter p {
+  color: #EF6161;
+  font-weight: 500;
+  font-size: 24px;
+  margin: 0;
+  text-align: center;
+}
+
+.pending-task-counter p:first-child {
+  margin-right: 10px;
+  font-size: 64px;
+}
+
 #todo-list {
   list-style-type: none;
   padding: 0;
@@ -24,6 +60,7 @@ button.delete-item {
   margin-left: 20px;
   cursor: pointer;
   font-size: 24px;
+  font-weight: 500;
 }
 
 /* Hide the browser's default checkbox */
@@ -47,18 +84,32 @@ button.delete-item {
   height: 25px;
   width: 25px;
   background-color: transparent;
-  border: 3px solid #1E9CEA;
+  border: 3px solid #1e9cea;
   border-radius: 6px;
 }
 
 /* When the checkbox is checked, add a blue background */
 .todo-label input:checked~.checkmark {
-  background-color: #1E9CEA;
+  /* background-color: #1E9CEA; */
+  background-color: rgba(30,156,234,0.8);
 }
-
-.todo-label input:checked~.item-desc {
+/*
+  " "
+  >
+  ~
+  +
+*/
+label.todo-label input:checked ~ .item-desc {
   text-decoration: line-through;
 }
+
+/*
+   :checked,
+   :hover,
+   :last-child,
+   :first-child
+   :nth-child(2n + 1)
+*/
 
 /* Create the checkmark/indicator (hidden when not checked) */
 .checkmark:after {
@@ -81,4 +132,31 @@ button.delete-item {
   border: solid white;
   border-width: 0 4px 4px 0;
   transform: rotate(45deg);
+}
+/* #B47AEA */
+.new-task-input {
+  color: #B47AEA;
+  font-weight: bold;
+  font-size: 24px;
+  border: none;
+  margin-bottom: 25px;
+}
+
+.new-task-input:focus {
+  outline: none;
+}
+
+.new-task-input::placeholder {
+  color: #B47AEA;
+}
+
+.new-task-button {
+  color: #FFF;
+  background-color: #B47AEA;
+  border: none;
+  border-radius: 50px;
+  width: 30px;
+  height: 30px;
+  font-size: 24px;
+  padding-top: 0;
 }
