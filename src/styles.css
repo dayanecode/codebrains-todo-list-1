@@ -93,15 +93,20 @@ button.delete-item {
   /* background-color: #1E9CEA; */
   background-color: rgba(30,156,234,0.8);
 }
+
+.is-done {
+  text-decoration: line-through;
+}
+
 /*
   " "
   >
   ~
   +
 */
-label.todo-label input:checked ~ .item-desc {
+/* label.todo-label input:checked ~ .item-desc {
   text-decoration: line-through;
-}
+} */
 
 /*
    :checked,

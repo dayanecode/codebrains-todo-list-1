@@ -1,18 +1,27 @@
 import { useState, useEffect } from "react";
 import "./styles.css";
 
+// 1. ao clicar no item, ele é tido como "done"
+// 2. uma linha "line-through" é adicionada, indicando que o item está done
+// 3. o controle deve ser via js
 export default function App() {
-  const [todo, setTodo] = useState("");
+  const defaultTodo = { name: "", isDone: false };
+  const [todo, setTodo] = useState(defaultTodo);
   const [todoList, setTodoList] = useState([]);
 
   useEffect(() => {
-    console.log({ todo });
-  }, [todo]);
+    console.log({ todoList });
+  }, [todoList]);
+
+  // useEffect(() => {
+  //   console.log({ todo });
+  //   console.log({ todoList });
+  // }, [todo]);
 
   function addTodo() {
-    if (!todo) return;
+    if (!todo.name) return;
     setTodoList((prev) => [...prev, todo]);
-    setTodo("");
+    setTodo(defaultTodo);
   }
 
   function handleDeleteTodo(position) {
@@ -21,6 +30,27 @@ export default function App() {
 
   function handleEnter(e) {
     if (e.key === "Enter") addTodo();
+  }
+
+  function handleCheckTask(e, taskName) {
+    // forma "por extenso"
+    // const newTodoList = todoList.map((el) => {
+    //   if (el.name === taskName) {
+    //     return { ...el, isDone: e.target.checked };
+    //   }
+    //   return el;
+    // });
+
+    // forma "esperta"
+    // const newTodoList = todoList.map((el) =>
+    //   el.name === taskName ? { ...el, isDone: e.target.checked } : el
+    // );
+
+    setTodoList((prev) =>
+      prev.map((el) =>
+        el.name === taskName ? { ...el, isDone: e.target.checked } : el
+      )
+    );
   }
 
   return (
@@ -35,12 +65,14 @@ export default function App() {
       <input
         className="new-task-input"
         onChange={(event) => {
-          setTodo(event.target.value);
+          setTodo((prev) => {
+            return { name: event.target.value, isDone: false };
+          });
         }}
         onKeyDown={handleEnter}
         type="text"
         placeholder="Add New Task"
-        value={todo}
+        value={todo.name}
       />
       <button className="new-task-button" onClick={addTodo}>
         +
@@ -59,9 +91,12 @@ export default function App() {
                 >
                   &#128465;
                 </button>
-                <label class="todo-label">
-                  <input type="checkbox" />
-                  <span className="item-desc">{todo}</span>
+                <label className={`todo-label ${todo.isDone ? "is-done" : ""}`}>
+                  <input
+                    type="checkbox"
+                    onChange={(e) => handleCheckTask(e, todo.name)}
+                  />
+                  <span className="item-desc">{todo.name}</span>
                   <span className="checkmark"></span>
                 </label>
               </li>
