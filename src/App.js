@@ -8,6 +8,8 @@ export default function App() {
   const defaultTodo = { name: "", isDone: false };
   const [todo, setTodo] = useState(defaultTodo);
   const [todoList, setTodoList] = useState([]);
+  const [contador, setContador] = useState(0);
+
 
   useEffect(() => {
     console.log({ todoList });
@@ -18,14 +20,19 @@ export default function App() {
   //   console.log({ todoList });
   // }, [todo]);
 
+  
   function addTodo() {
     if (!todo.name) return;
+    setContador(contador + 1);
     setTodoList((prev) => [...prev, todo]);
-    setTodo(defaultTodo);
+    setTodo(defaultTodo);    
+
   }
 
   function handleDeleteTodo(position) {
+    setContador(contador - 1);
     setTodoList((prev) => prev.filter((todo, i) => position !== i));
+    
   }
 
   function handleEnter(e) {
@@ -50,16 +57,18 @@ export default function App() {
       prev.map((el) =>
         el.name === taskName ? { ...el, isDone: e.target.checked } : el
       )
+      
     );
+    
   }
-
+ 
   return (
     <main>
       <header>TaskDo</header>
-
+  
       <section className="pending-task-counter">
-        <p>👨🏽‍💻</p>
-        <p>4 tasks pending</p>
+        <p>👨🏽‍💻</p>       
+        <p>{contador} tasks pending</p>     
       </section>
 
       <input
